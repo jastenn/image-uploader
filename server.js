@@ -3,15 +3,20 @@ const fs = require("fs")
 
 const express = require("express")
 const multer = require("multer")
-const dotenv = require("dotenv")
 
-dotenv.config({
+require("dotenv").config({
   path: "./config/.env",
 })
+
+const dbConnect = require("./config/dbConnect")
+
+const connection = dbConnect()
 
 const upload = multer()
 
 const app = express()
+
+const PORT = process.env.PORT || 3000
 
 app.post("/upload", (req, res) => {
   res.send("/upload works")
@@ -26,4 +31,7 @@ https
     },
     app
   )
-  .listen(3000)
+  .listen(
+    3000,
+    console.log(`Server running in ${process.env.NODE_ENV} on port ${PORT}`)
+  )
