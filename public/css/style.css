@@ -1,0 +1,141 @@
+:root {
+  --clr-bg: #fafafb;
+  --clr-white: #fff;
+  --clr-gray-600: #4f4f4f;
+  --clr-gray-500: #828282;
+  --clr-gray-400: #bdbdbd;
+  --clr-gray-100: #f6f8fb;
+  --clr-gray-50: #f2f2f2;
+  --clr-blue-400: #2f80ed;
+  --clr-blue-300: #97bef4;
+  --size-xs: 0.75rem;
+  --size-sm: 0.875rem;
+  --size-base: 1rem;
+  --size-md: 1.125rem;
+  --size-xm: 1.25rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  color: var(--clr-gray-600);
+  font-weight: 500;
+  background-color: var(--clr-bg);
+  box-sizing: border-box;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dragover {
+  background-color: red;
+}
+
+.card {
+  text-align: center;
+  padding: 2.25rem 2rem;
+  width: 100%;
+  max-width: 25.125rem;
+  margin: 0 auto;
+  background-color: var(--clr-white);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: var(--size-xs);
+}
+
+.heading-primary {
+  font-size: var(--size-md);
+  font-weight: 500;
+  margin-bottom: var(--size-sm);
+}
+
+.heading-subheading {
+  font-size: 0.625rem;
+  margin-bottom: 1.875rem;
+}
+
+.droppable {
+  background-color: var(--clr-gray-100);
+  margin-bottom: var(--size-md);
+  padding: 2.25rem 0;
+  border-radius: var(--size-sm);
+  border: 2px dashed var(--clr-blue-300);
+}
+
+.separator,
+.droppable-label {
+  font-size: var(--size-xs);
+  color: var(--clr-gray-400);
+}
+
+.separator {
+  margin-bottom: var(--size-xm);
+}
+
+input[type="file"] {
+  opacity: 0;
+  outline: none;
+  position: absolute;
+  z-index: -100;
+  top: -100;
+  left: -100;
+}
+
+input[type="file"]:focus + .file-upload {
+  background-color: var(--clr-blue-300);
+}
+
+.file-upload {
+  background-color: var(--clr-blue-400);
+  font-size: var(--size-xs);
+  color: var(--clr-white);
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  transition: background-color 200ms ease-out;
+}
+
+.throbber-label {
+  text-align: left;
+  font-size: var(--size-md);
+  margin-bottom: 1.875rem;
+}
+
+.throbber {
+  background-color: var(--clr-gray-50);
+  position: relative;
+  height: 0.5rem;
+  border-radius: 10rem;
+  overflow: hidden;
+}
+
+.throbber-thumb {
+  background-color: var(--clr-blue-400);
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translate(-100%, -50%);
+  height: 100%;
+  width: 25%;
+  border-radius: 10rem;
+  animation-name: loading;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes loading {
+  from {
+    left: 0;
+  }
+
+  to {
+    left: 150%;
+  }
+}

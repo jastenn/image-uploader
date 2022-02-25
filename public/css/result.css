@@ -1,0 +1,68 @@
+.checkmark {
+  height: 2.25rem;
+  margin-bottom: var(--size-xs);
+}
+
+.success-msg {
+  font-size: var(--size-md);
+  line-height: 1;
+  font-weight: 500;
+  margin-bottom: 1.625rem;
+}
+
+.image-preview {
+  border-radius: var(--size-xs);
+  width: 100%;
+  margin-bottom: 1.625rem;
+}
+
+.result-url-container {
+  display: flex;
+  background-color: var(--clr-gray-100);
+  height: 2.375rem;
+  align-items: center;
+  width: 100;
+  box-shadow: inset 0 0 0 1px #e0e0e0;
+  border-radius: 0.5rem;
+  padding: 0 0.25rem;
+}
+
+.result-url-container input[type="text"] {
+  font-family: inherit;
+  font-size: 0.5rem;
+  width: 100%;
+  border: none;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  min-width: 0;
+  background-color: transparent;
+}
+
+.result-url-container input[type="text"]:focus {
+  outline: none;
+}
+
+.result-url-container button {
+  flex-shrink: 0;
+  background-color: var(--clr-blue-400);
+  color: var(--clr-white);
+  font-family: inherit;
+  font-size: 0.5rem;
+  height: 80%;
+  border: none;
+  padding: 0 1rem;
+  border-radius: 0.5rem;
+  margin-left: 0.75em;
+  cursor: pointer;
+  transition: background-color 200ms ease-out;
+}
+
+.result-url-container button:focus {
+  outline: none;
+  background-color: var(--clr-blue-300);
+}
+
+.result-url-container button:disabled {
+  cursor: default;
+}

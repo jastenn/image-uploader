@@ -1,0 +1,18 @@
+extends layout/layout.pug
+
+block head
+  link(rel="stylesheet", href="css/result.css")
+
+block content
+  .card
+    img.checkmark(src="images/check-mark-circle.svg", alt="check")
+
+    h1.success-msg Uploaded Successfully
+
+    img.image-preview(src=`${image.source}`)
+
+    .result-url-container
+      input#result-url(type="text", readonly="true", value=`${link}`)
+      button.copy-link#copy-btn(onClick="handleCopy(event)") Copy Link
+    
+  script(src="script/result.js") 
