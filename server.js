@@ -42,14 +42,17 @@ app.use(express.static("public"))
 
 app.set("view engine", "pug")
 
-app.get("/", (req, res) => {
-  const renderData = { title: "Image Uploader" }
+app.get(
+  "/",
+  asyncHandler((req, res) => {
+    const renderData = { title: "Image Uploader" }
 
-  if (req.query.error === "invalid-id" && req.query.id) {
-    renderData.error = `Id ${req.query.id} is not valid`
-  }
-  res.render("index", renderData)
-})
+    if (req.query.error === "invalid-id" && req.query.id) {
+      renderData.error = `Id ${req.query.id} is not valid`
+    }
+    res.render("index", renderData)
+  })
+)
 
 app.get(
   "/photos/:id",
@@ -80,7 +83,7 @@ app.post(
 
 app.get(
   "/:id",
-  asyncHandler(async (req, res) => {
+  asyncHandler(async (req, res, next) => {
     const image = await Image.findById(req.params.id)
     if (!image) return res.redirect("/")
 
@@ -95,25 +98,6 @@ app.get(
   })
 )
 
-app.use((err, req, res) => {
-  console.log(err)
-  if (err.name === "CastError" && err.kind === "ObjectId") {
-    return res.status(400).redirect(`/?error=invalid-id&id=${err.value}`)
-  }
-
-  res.status(500).send("Server error")
-})
-
-// https
-//   .createServer(
-//     {
-//       key: fs.readFileSync("key.pem"),
-//       cert: fs.readFileSync("cert.pem"),
-//       passphrase: process.env.PASS_PHRASE,
-//     },
-//     app
-//   )
-//   .listen(PORT)
 app.listen(
   PORT,
   console.log(`Server Running on port ${PORT} in ${process.env.NODE_ENV}`)
