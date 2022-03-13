@@ -104,15 +104,17 @@ app.use((err, req, res) => {
   res.status(500).send("Server error")
 })
 
-https
-  .createServer(
-    {
-      key: fs.readFileSync("key.pem"),
-      cert: fs.readFileSync("cert.pem"),
-      passphrase: process.env.PASS_PHRASE,
-    },
-    app
-  )
-  .listen(PORT)
-
-console.log(PORT)
+// https
+//   .createServer(
+//     {
+//       key: fs.readFileSync("key.pem"),
+//       cert: fs.readFileSync("cert.pem"),
+//       passphrase: process.env.PASS_PHRASE,
+//     },
+//     app
+//   )
+//   .listen(PORT)
+app.listen(
+  PORT,
+  console.log(`Server Running on port ${PORT} in ${process.env.NODE_ENV}`)
+)
