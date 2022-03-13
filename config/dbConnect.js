@@ -1,10 +1,7 @@
 const mongoose = require("mongoose")
 
 module.exports = async function dbConnect() {
-  const mongoUri =
-    process.env.NODE_ENV === "development"
-      ? process.env.LOCAL_MONGO_URI
-      : process.env.MONGO_URI
+  const mongoUri = process.env.MONGO_URI
 
   try {
     const connection = await mongoose.connect(mongoUri)

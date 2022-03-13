@@ -9,19 +9,27 @@ const favicon = require("serve-favicon")
 
 const Image = require("./model/image")
 
-const asyncHandler = require("./util/asyncHandler")
+const asyncHandler = require("./util/async-handler")
+const HttpError = require("./util/http-error")
 
 require("dotenv").config({
   path: "./config/.env",
 })
 
+const PORT = process.env.PORT || 3000
+
 const dbConnect = require("./config/dbConnect")
-const res = require("express/lib/response")
 
 dbConnect()
 
 const upload = multer({
   size: 16_000_000,
+  fileFilter: (req, file, cb) => {
+    if (file.mimetype.split("/")[0] !== "image") {
+      return cb(null, false)
+    }
+    cb(null, true)
+  },
 })
 
 const app = express()
@@ -34,33 +42,33 @@ app.use(express.static("public"))
 
 app.set("view engine", "pug")
 
+app.get("/", (req, res) => {
+  const renderData = { title: "Image Uploader" }
+
+  if (req.query.error === "invalid-id" && req.query.id) {
+    renderData.error = `Id ${req.query.id} is not valid`
+  }
+  res.render("index", renderData)
+})
+
 app.get(
-  "/",
-  asyncHandler((req, res) => {
-    res.render("index", { title: "Image Uploader" })
+  "/photos/:id",
+  asyncHandler(async (req, res) => {
+    const image = await Image.findById(req.params.id)
+
+    res
+      .setHeader("Content-Disposition", `filename=${image.original_name}`)
+      .setHeader("Content-Type", "image/*")
+      .send(image.buffer)
   })
 )
-
-const PORT = process.env.PORT || 3000
-
-// Routes
-/**
- * TODO: Handle Invalid ID errors
- */
-app.get("/photos/:id", async (req, res) => {
-  const image = await Image.findById(req.params.id)
-
-  res
-    .setHeader("Content-Disposition", `filename=${image.original_name}`)
-    .setHeader("Content-Type", "image/*")
-    .send(image.buffer)
-})
 
 app.post(
   "/upload",
   upload.single("image"),
+  asyncHandler(async (req, res, next) => {
+    if (!req.file) next(new HttpError("Image is undefined", 400))
 
-  asyncHandler(async (req, res) => {
     const image = await Image.create({
       ...req.file,
       original_name: req.file.originalname,
@@ -87,9 +95,15 @@ app.get(
   })
 )
 
-app.use((err, req, res, next) => {
+app.use((err, req, res) => {
+  console.log(err)
+  if (err.name === "CastError" && err.kind === "ObjectId") {
+    return res.status(400).redirect(`/?error=invalid-id&id=${err.value}`)
+  }
+
   res.status(500).send("Server error")
 })
+
 https
   .createServer(
     {
@@ -99,7 +113,6 @@ https
     },
     app
   )
-  .listen(
-    3000,
-    console.log(`Server running in ${process.env.NODE_ENV} on port ${PORT}`)
-  )
+  .listen(PORT)
+
+console.log(PORT)

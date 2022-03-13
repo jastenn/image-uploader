@@ -1,43 +1,21 @@
-//- <!-- <!DOCTYPE html>
-//- <html lang="en">
-//-   <head>
-//-     <meta charset="utf-8" />
-//-     <meta
-//-       name="viewport"
-//-       content="width=device-width, initial-scale=1,
-//-   maximum-scale=5"
-//-     />
-
-
-//-     <title>Devchallenges</title>
-//-   </head>
-//-   <body>
-//-     <main>Still working</main>
-//-   </body>
-//-     <link rel="icon" href="devchallenges.png" />
-
-//-     <link
-//-       rel="shortcut icon"
-//-       type="image/x-icon"
-//-       href="https://devchallenges.io/"
-//-     />
-
-//- </html> -->
 extends layout/layout.pug
 
 block content 
+  .backdrop
   form.card#form(method="POST", action="/upload", enctype="multipart/form-data")
+    if error 
+      p.error #{error}
     .heading 
       h1.heading-primary Upload your image
       p.heading-subheading File should be Jpeg, Png or Webp
 
-    .droppable#file-droppable
+    .droppable#file-droppable(onDrop="uploadFileOnDrop(event)", onClick="droppableClickHandler()")
       img(src="images/image.svg", aria-hidden="true")
       p.droppable-label Drag & Drop your image here
 
     p.separator or 
 
-    input#input-file-upload(type="file", name="image", accept="image/*")
+    input#input-file-upload(type="file", name="image", accept="image/*" onChange="onFileUpload()")
     label(for="input-file-upload").file-upload Choose File
 
   script(src="script/app.js") 
