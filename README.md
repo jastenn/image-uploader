@@ -8,11 +8,11 @@
 
 <div align="center">
   <h3>
-    <a href="https://{your-demo-link.your-domain}">
+    <a href="https://boiling-escarpment-67990.herokuapp.com">
       Demo
     </a>
     <span> | </span>
-    <a href="https://{your-url-to-the-solution}">
+    <a href="https://github.com/jastenn/image-uploader">
       Solution
     </a>
     <span> | </span>
@@ -22,8 +22,6 @@
   </h3>
 </div>
 
-<!-- TABLE OF CONTENTS -->
-
 ## Table of Contents
 
 - [Overview](#overview)
@@ -31,13 +29,11 @@
 - [Features](#features)
 - [How to use](#how-to-use)
 - [Contact](#contact)
-- [Acknowledgements](#acknowledgements)
 
-<!-- OVERVIEW -->
 
 ## Overview
 
-![screenshot](https://user-images.githubusercontent.com/16707738/92399059-5716eb00-f132-11ea-8b14-bcacdc8ec97b.png)
+![screenshot](https://boiling-escarpment-67990.herokuapp.com/photos/623041de619b546478e03069)
 
 Introduce your projects by taking a screenshot or a gif. Try to tell visitors a story about your project by answering:
 
@@ -46,19 +42,19 @@ Introduce your projects by taking a screenshot or a gif. Try to tell visitors a 
 - What have you learned/improved?
 - Your wisdom? :)
 
+Through this project I learned a lot since this is the first my node application. I also learned about file/image handling and using templating engine using pug. Also with this project, my knowledge in deployment become broader. It also refreshes my knowledge on using vanilla javascript as I am used to Javascript Frameworks.
+
 ### Built With
 
-<!-- This section should list any major frameworks that you built your project using. Here are a few examples.-->
-
-- [React](https://reactjs.org/)
-- [Vue.js](https://vuejs.org/)
-- [Tailwind](https://tailwindcss.com/)
+- [Nodejs](https://nodejs.org/en/)
+- [Pug](https://pugjs.org/)
+- [Mongodb](https://www.mongodb.com/)
+- [Expressjs](https://expressjs.com/)
+- [Multer](https://github.com/expressjs/multer)
 
 ## Features
-
-<!-- List the features of your application or follow the template. Don't share the figma file here :) -->
-
-This application/site was created as a submission to a [DevChallenges](https://devchallenges.io/challenges) challenge. The [challenge](https://devchallenges.io/challenges/O2iGT9yBd6xZBrOcVirx) was to build an application to complete the given user stories.
+Users are able to upload their images
+Users are able to retrieve their image anywhere by its url
 
 ## How To Use
 
@@ -77,16 +73,10 @@ $ npm install
 $ npm start
 ```
 
-## Acknowledgements
+NOTE: Make sure to add your environment variables see: [env-template](https://github.com/jastenn/image-uploader/blob/main/config/env-template.txt)
 
-<!-- This section should list any articles or add-ons/plugins that helps you to complete the project. This is optional but it will help you in the future. For example -->
-
-- [Steps to replicate a design with only HTML and CSS](https://devchallenges-blogs.web.app/how-to-replicate-design/)
-- [Node.js](https://nodejs.org/)
-- [Marked - a markdown parser](https://github.com/chjj/marked)
 
 ## Contact
 
-- Website [your-website.com](https://{your-web-site-link})
-- GitHub [@your-username](https://{github.com/your-usermame})
-- Twitter [@your-twitter](https://{twitter.com/your-username})
+- GitHub [@jastenn](https://github.com/jastenn)
+- Facebook [Justine Aviso](https://www.facebook.com/aviso.jstn)
